@@ -101,7 +101,7 @@ public class TelegramBotService {
         SendDocument sendDocument = null;
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         UserBot userBot = userBotService.findUserBotByChatId(chatId);
-        if (userBot == null || userBot.getTypeDis()==null) {
+        if (userBot == null || userBot.getTypeDis() == null) {
             sendDocument = new SendDocument(chatId,
                     new File(price1));
         } else {
@@ -170,5 +170,13 @@ public class TelegramBotService {
         InlineKeyboardButton button = new InlineKeyboardButton("Главное меню");
         button.callbackData("Главное меню");
         return button;
+    }
+
+    public SendMessage takeBlank(Long chatId) {
+        UserBot userBot = userBotService.findUserBotByChatId(chatId);
+        if (userBot == null || userBot.getTypeDis() == null) {
+            return new SendMessage(chatId, "Введите номер телефона и Ваше имя в формате: 89001122333 Имя \nЗатем отправьте бланк заказа в чат");
+        }
+        return new SendMessage(chatId, "Отправьте бланк заказа в чат");
     }
 }

@@ -87,7 +87,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                             }
 
                         }
-                        case "4" -> telegramBot.execute(new SendMessage(chatId, "Отправьте бланк заказа в чат"));
+                        case "4" -> telegramBot.execute(telegramBotService.takeBlank(chatId));
 
                         case "5" -> telegramBotService.findWeather(chatId);
 
