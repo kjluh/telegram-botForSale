@@ -25,7 +25,7 @@ public class VolunteerService {
     /**
      * Сюда нужно будет вписать ник в телеграме волонтера
      */
-    private int volunteerChat = 1653160516;
+    private int volunteerChat = 1653160516; // тут необходимо внести ид чата менеджера с ботом для получения сообщений
 
     /**
      * Метод пригласить в текущий чат волонтера
@@ -42,7 +42,7 @@ public class VolunteerService {
 
     private String findUserBot(Long chatId) {
         UserBot userBot = repository.findUserBotByChatId(chatId);
-        if (userBot.getPhoneNumber()!=null) {
+        if (userBot!= null && userBot.getPhoneNumber()!=null) {
             return userBot.getPhoneNumber().toString();
         }
         return null;

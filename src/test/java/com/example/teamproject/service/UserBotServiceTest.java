@@ -31,18 +31,14 @@ import static org.mockito.Mockito.when;
 public class UserBotServiceTest {
 
     @Autowired
-    UserBotService adoptiveParentService;
+    UserBotService userBotService;
     @Autowired
     private TelegramBotUpdatesListener telegramBotUpdatesListener;
-    private UserBot adoptiveParent = new UserBot();
+    private UserBot userBot = new UserBot();
     @MockBean
     TelegramBot telegramBot;
     @MockBean
-    UserRepository adoptiveParentRepository;
-    @MockBean
-    TelegramBotService telegramBotService;
-    @MockBean
-    CurrencyService currencyService;
+    UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
@@ -50,39 +46,38 @@ public class UserBotServiceTest {
         String name = "Ben";
         String messageText = "qwerty";
         String phoneNumber = "89000000000";
-        adoptiveParent.setTypeDis(TypeOfDiscount.first);
-        adoptiveParent.setChatId(chatId);
-        adoptiveParent.setName(name);
-        adoptiveParent.setMessage(messageText);
-        adoptiveParent.setPhoneNumber(Long.parseLong(phoneNumber));
+        userBot.setTypeDis(TypeOfDiscount.first);
+        userBot.setChatId(chatId);
+        userBot.setName(name);
+        userBot.setMessage(messageText);
+        userBot.setPhoneNumber(Long.parseLong(phoneNumber));
     }
 
     @Test
     public void addUserContactTest() {
-        when(adoptiveParentRepository.save(any())).thenReturn(adoptiveParent);
-        assertEquals(adoptiveParentService.save(adoptiveParent), adoptiveParent);
+        when(userRepository.save(any())).thenReturn(userBot);
+        assertEquals(userBotService.save(userBot), userBot);
     }
 
     @Test
     public void findAdoptiveParentByChatIdTest() {
-        when(adoptiveParentRepository.findUserBotByChatId(any())).thenReturn(adoptiveParent);
-        assertEquals(adoptiveParentRepository.findUserBotByChatId(123L), adoptiveParent);
+        when(userRepository.findUserBotByChatId(any())).thenReturn(userBot);
+        assertEquals(userRepository.findUserBotByChatId(123L), userBot);
     }
 
     @Test
     public void findAdoptiveParentByIdTest() {
-        when(adoptiveParentRepository.findById(any())).thenReturn(Optional.of(adoptiveParent));
-        assertEquals(adoptiveParentRepository.findById(1L), Optional.of(adoptiveParent));
+        when(userRepository.findById(any())).thenReturn(Optional.of(userBot));
+        assertEquals(userRepository.findById(1L), Optional.of(userBot));
     }
 
     @Test
     public void saveInfoDataBaseTest() {
-// НЕ ИДЕТ
         Update update = mock(Update.class);
         Message message = mock(Message.class);
         Chat chat = mock(Chat.class);
         when(chat.id()).thenReturn(123L);
-        when(adoptiveParentService.findUserBotByChatId(any())).thenReturn(adoptiveParent);
+        when(userBotService.findUserBotByChatId(any())).thenReturn(userBot);
         when(message.text()).thenReturn("89991122333 name text message");
         when(message.chat()).thenReturn(chat);
         when(update.message()).thenReturn(message);
@@ -98,30 +93,30 @@ public class UserBotServiceTest {
 
     @Test
     public void saveParentDataBaseTest() {
-        when(adoptiveParentRepository.save(any())).thenReturn(adoptiveParent);
-        assertEquals(adoptiveParentService.save(adoptiveParent), adoptiveParent);
+        when(userRepository.save(any())).thenReturn(userBot);
+        assertEquals(userBotService.save(userBot), userBot);
     }
 
     @Test
     public void findAllTest() {
         ArrayList<UserBot> adoptiveParents = new ArrayList<>();
-        adoptiveParents.add(adoptiveParent);
-        adoptiveParents.add(adoptiveParent);
-        adoptiveParents.add(adoptiveParent);
+        adoptiveParents.add(userBot);
+        adoptiveParents.add(userBot);
+        adoptiveParents.add(userBot);
 
-        when(adoptiveParentRepository.findAll()).thenReturn(adoptiveParents);
+        when(userRepository.findAll()).thenReturn(adoptiveParents);
     }
 
     @Test
     public void saveTest() {
-        when(adoptiveParentRepository.save(any())).thenReturn(adoptiveParent);
-        assertEquals(adoptiveParentService.save(adoptiveParent), adoptiveParent);
+        when(userRepository.save(any())).thenReturn(userBot);
+        assertEquals(userBotService.save(userBot), userBot);
     }
 
     @Test
     public void updateAdoptiveParentTest() {
-        when(adoptiveParentRepository.save(any())).thenReturn(adoptiveParent);
-        assertEquals(adoptiveParentService.save(adoptiveParent), adoptiveParent);
+        when(userRepository.save(any())).thenReturn(userBot);
+        assertEquals(userBotService.save(userBot), userBot);
     }
 
 }

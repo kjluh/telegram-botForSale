@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -51,7 +52,8 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     private static final Pattern TELEPHONE_MESSAGE = Pattern.compile(
             "(\\d{11})(\\s)([А-яA-z)]+)(\\s)([А-яA-z)\\s\\d]+)"); // парсим сообщение на группы по круглым скобкам
 
-    private static final Pattern TELEPHONE = Pattern.compile("(\\d{11})"); // парсим сообщение на группы по круглым скобкам
+    @Value("${price.number.1}")
+    private String price1;
 
     @Override
     public int process(List<Update> updates) {
@@ -72,8 +74,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                         case "оплата" ->
                                 telegramBot.execute(new SendMessage(chatId, " тут должно быть описание способов оплаты"));
                         case "общий прайс" ->
-                                telegramBot.execute(new SendDocument(chatId, new File("src/main/java/com/example/teamproject/price/1.xlsx")));
-// ПОМЕНЯТЬ С МЕСЕДЖА НА ДОКУМЕНТ И ВСТАВИТЬ АДРЕС
+                                telegramBot.execute(new SendDocument(chatId, new File(price1)));
                         case "2" -> {
                             telegramBotService.giveBlank(chatId);
                         }

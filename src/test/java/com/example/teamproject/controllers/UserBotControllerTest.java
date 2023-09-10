@@ -45,12 +45,6 @@ public class UserBotControllerTest {
     @MockBean
     private UserBotService userBotServiceMock;
 
-    @MockBean
-    private TelegramBotService telegramBotService;
-
-    @MockBean
-    private CurrencyService currencyService;
-
     @BeforeEach
     void setUp() throws JSONException {
         chatId = 123L;
