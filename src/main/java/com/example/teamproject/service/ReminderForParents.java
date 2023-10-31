@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Сервис для напоминания о каких - либо событиях
+ */
 @Service
 @EnableScheduling
 public class ReminderForParents {

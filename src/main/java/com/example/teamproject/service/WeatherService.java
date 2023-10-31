@@ -17,6 +17,9 @@ import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.util.Optional;
 
+/**
+ * Сервис предоставляет прогноз погоды на сегодня в определенных городах
+ */
 @Service
 public class WeatherService {
 

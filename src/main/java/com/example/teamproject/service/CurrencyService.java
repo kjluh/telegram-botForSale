@@ -18,6 +18,9 @@ import java.io.StringReader;
 import java.util.Optional;
 
 
+/**
+ * Сервис для предоставления курса валют
+ */
 @Service
 public class CurrencyService {
 

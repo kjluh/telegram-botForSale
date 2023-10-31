@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Сервис для приглашения волонтера в чат с клиентом
+ * Сервис для приглашения менеджера в чат с клиентом
  */
 @Service
 @Data
@@ -23,15 +23,15 @@ public class VolunteerService {
     }
 
     /**
-     * Сюда нужно будет вписать ник в телеграме волонтера
+     * Сюда нужно будет вписать ник в телеграме администратора
      */
     private int volunteerChat = 1653160516; // тут необходимо внести ид чата менеджера с ботом для получения сообщений
 
     /**
-     * Метод пригласить в текущий чат волонтера
+     * Метод пригласить в текущий чат менеджера
      */
     public SendMessage sendMessageVolunteer(Long chatId) {
-        if (findUserBot(chatId)!=null){
+        if (findUserBot(chatId) != null) {
             return new SendMessage(volunteerChat, "Вас просит перезвонить покупатель: "
                     + repository.findUserBotByChatId(chatId).getName() + " "
                     + repository.findUserBotByChatId(chatId).getPhoneNumber()
@@ -42,7 +42,7 @@ public class VolunteerService {
 
     private String findUserBot(Long chatId) {
         UserBot userBot = repository.findUserBotByChatId(chatId);
-        if (userBot!= null && userBot.getPhoneNumber()!=null) {
+        if (userBot != null || userBot.getPhoneNumber() != null) {
             return userBot.getPhoneNumber().toString();
         }
         return null;
